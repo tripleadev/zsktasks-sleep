@@ -54,15 +54,13 @@ const Images = () => {
         setImg(prevI => {
           return allImages.length - 1 > prevI ? prevI + 1 : 0
         })
-
-        setVisible(1)
       }, 2000)
 
       return () => {
         clearInterval(interval)
       }
     }, 6000)
-  }, [])
+  }, [allImages.length])
 
   return (
     <Wrapper>
@@ -70,6 +68,7 @@ const Images = () => {
       <motion.img
         alt="spanko-image"
         src={publicURL}
+        onLoad={() => setVisible(1)}
         animate={{ opacity: visible }}
         transition={{ duration: 2 }}
       />
