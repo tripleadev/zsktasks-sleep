@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 
 const Images = () => {
   const [img, setImg] = useState(0)
-  const [visible, setVisible] = useState(0)
+  const [visible, setVisible] = useState(1)
 
   const {
     allFile: { edges: allImages },
@@ -45,22 +45,18 @@ const Images = () => {
   } = allImages[img]
 
   useEffect(() => {
-    setVisible(1)
-
-    const interval = setInterval(() => {
-      setVisible(0)
-
+    if (visible === 1) {
       setTimeout(() => {
-        setImg(prevI => {
-          return allImages.length - 1 > prevI ? prevI + 1 : 0
-        })
-      }, 2000)
+        setVisible(0)
 
-      return () => {
-        clearInterval(interval)
-      }
-    }, 6000)
-  }, [allImages.length])
+        setTimeout(() => {
+          setImg(prevI => {
+            return allImages.length - 1 > prevI ? prevI + 1 : 0
+          })
+        }, 2000)
+      }, 6000)
+    }
+  }, [visible])
 
   return (
     <Wrapper>
