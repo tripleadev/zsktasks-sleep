@@ -15,9 +15,7 @@ const Column = styled.div`
 `
 
 const Grid = () => {
-  const [columns, setColumns] = useState(
-    Math.floor((window.innerWidth - 50) / 300)
-  )
+  const [columns, setColumns] = useState(0)
 
   useEffect(() => {
     const func = () => {
@@ -31,6 +29,10 @@ const Grid = () => {
     }
   })
 
+  useEffect(() => {
+    setColumns(Math.floor((window.innerWidth - 100) / 300))
+  }, [])
+
   const {
     allFile: { edges },
   } = useStaticQuery(graphql`
@@ -38,6 +40,7 @@ const Grid = () => {
       allFile {
         edges {
           node {
+            publicURL
             childImageSharp {
               fluid {
                 ...GatsbyImageSharpFluid
@@ -57,11 +60,13 @@ const Grid = () => {
       {chunks.map((chunk, i) => (
         <Column key={`column_${i}`}>
           {chunk.map(({ node }, imgI) => (
-            <Img
-              fluid={node.childImageSharp.fluid}
-              style={{ marginBottom: "16px" }}
-              key={`column_${1}_image_${imgI}`}
-            />
+            <a href={node.publicURL}>
+              <Img
+                fluid={node.childImageSharp.fluid}
+                style={{ marginBottom: "16px" }}
+                key={`column_${1}_image_${imgI}`}
+              />
+            </a>
           ))}
         </Column>
       ))}
