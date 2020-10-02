@@ -44,19 +44,19 @@ const Images = () => {
     node: { publicURL },
   } = allImages[img]
 
-  useEffect(() => {
-    if (visible === 1) {
-      setTimeout(() => {
-        setVisible(0)
+  const onImageLoad = () => {
+    setVisible(1)
 
-        setTimeout(() => {
-          setImg(prevI => {
-            return allImages.length - 1 > prevI ? prevI + 1 : 0
-          })
-        }, 2000)
-      }, 6000)
-    }
-  }, [visible])
+    setTimeout(() => {
+      setVisible(0)
+
+      setTimeout(() => {
+        setImg(prevI => {
+          return allImages.length - 1 > prevI ? prevI + 1 : 0
+        })
+      }, 2000)
+    }, 6000)
+  }
 
   return (
     <Wrapper>
@@ -64,7 +64,7 @@ const Images = () => {
       <motion.img
         alt="spanko-image"
         src={publicURL}
-        onLoad={() => setVisible(1)}
+        onLoad={onImageLoad}
         animate={{ opacity: visible }}
         transition={{ duration: 2 }}
       />
