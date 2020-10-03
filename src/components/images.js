@@ -55,7 +55,7 @@ const Images = () => {
           return allImages.length - 1 > prevI ? prevI + 1 : 0
         })
       }, 2000)
-    }, 6000)
+    }, 4000)
   }
 
   return (
