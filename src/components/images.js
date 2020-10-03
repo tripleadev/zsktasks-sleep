@@ -60,7 +60,7 @@ const Images = () => {
 
   return (
     <Wrapper>
-      <h1>spanko...</h1>
+      <h1>nie moge mam spanko</h1>
       <motion.img
         alt="spanko-image"
         src={publicURL}
