@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "zsktasks-sleep",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Gimmie some sleep",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Adam Siekierski <a@siekierski.ml>",
   "dependencies": {
     "framer-motion": "^2.7.7",
     "gatsby": "^2.24.66",

@@ -60,11 +60,10 @@ const Grid = () => {
       {chunks.map((chunk, i) => (
         <Column key={`column_${i}`}>
           {chunk.map(({ node }, imgI) => (
-            <a href={node.publicURL}>
+            <a href={node.publicURL} key={`column_${1}_image_${imgI}`}>
               <Img
                 fluid={node.childImageSharp.fluid}
                 style={{ marginBottom: "16px" }}
-                key={`column_${1}_image_${imgI}`}
               />
             </a>
           ))}
