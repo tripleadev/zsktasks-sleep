@@ -47,6 +47,8 @@ const Images = () => {
   const onImageLoad = () => {
     setVisible(1)
 
+    console.log("dupa")
+
     setTimeout(() => {
       setVisible(0)
 
@@ -65,6 +67,7 @@ const Images = () => {
         alt="spanko-image"
         src={publicURL}
         onLoad={onImageLoad}
+        onError={onImageLoad}
         animate={{ opacity: visible }}
         transition={{ duration: 2 }}
       />
