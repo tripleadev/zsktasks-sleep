@@ -64,7 +64,7 @@ const Images = () => {
     <Wrapper>
       <h1>nie moge mam spanko</h1>
       <motion.img
-        alt="spanko-image"
+        alt="spanko"
         src={publicURL}
         onLoad={onImageLoad}
         onError={onImageLoad}
