@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { motion } from "framer-motion"
-import { useImageLoaded } from "../hooks/useImageLoaded"
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -25,22 +24,7 @@ const Wrapper = styled.div`
 
 const Images = () => {
   const [img, setImg] = useState(0)
-  const [visible, setVisible] = useState(1)
-  const [imgRef, onImgLoad] = useImageLoaded(() => {
-    setVisible(1)
-
-    console.log("dupa")
-
-    setTimeout(() => {
-      setVisible(0)
-
-      setTimeout(() => {
-        setImg(prevI => {
-          return allImages.length - 1 > prevI ? prevI + 1 : 0
-        })
-      }, 2000)
-    }, 4000)
-  })
+  const [visible, setVisible] = useState(0)
 
   const {
     allFile: { edges: allImages },
@@ -60,13 +44,26 @@ const Images = () => {
     node: { publicURL },
   } = allImages[img]
 
+  const onImgLoad = () => {
+    setVisible(1)
+
+    setTimeout(() => {
+      setVisible(0)
+
+      setTimeout(() => {
+        setImg(prevI => {
+          return allImages.length - 1 > prevI ? prevI + 1 : 0
+        })
+      }, 2000)
+    }, 4000)
+  }
+
   return (
     <Wrapper>
       <h1>nie moge mam spanko</h1>
       <motion.img
         alt="spanko"
         src={publicURL}
-        ref={imgRef}
         onLoad={onImgLoad}
         onError={onImgLoad}
         animate={{ opacity: visible }}

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
-import chunk from "lodash.chunk"
 import Img from "gatsby-image"
 
 const Wrapper = styled.div`
-  display: flex;
-  padding: 50px;
+  column-count: ${({ columnCount }) => columnCount};
+  column-gap: 15px;
 `
 
-const Column = styled.div`
-  flex: 1;
-  padding: 8px;
+const StyledImage = styled(Img)`
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 15px 0;
 `
 
 const Grid = () => {
@@ -52,22 +52,10 @@ const Grid = () => {
     }
   `)
 
-  const numOfImages = Math.floor(edges.length / columns)
-  const chunks = chunk(edges, numOfImages)
-
   return (
-    <Wrapper>
-      {chunks.map((chunk, i) => (
-        <Column key={`column_${i}`}>
-          {chunk.map(({ node }, imgI) => (
-            <a href={node.publicURL} key={`column_${1}_image_${imgI}`}>
-              <Img
-                fluid={node.childImageSharp.fluid}
-                style={{ marginBottom: "16px" }}
-              />
-            </a>
-          ))}
-        </Column>
+    <Wrapper columnCount={columns}>
+      {edges.map(({ node }) => (
+        <StyledImage fluid={node.childImageSharp.fluid} />
       ))}
     </Wrapper>
   )
