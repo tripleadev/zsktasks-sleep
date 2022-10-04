@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
-import { motion } from "framer-motion"
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -14,7 +13,6 @@ const Wrapper = styled.div`
   img {
     max-height: 90%;
     max-width: 90%;
-    opacity: 0;
   }
 
   h1 {
@@ -24,7 +22,6 @@ const Wrapper = styled.div`
 
 const Images = () => {
   const [img, setImg] = useState(0)
-  const [visible, setVisible] = useState(0)
 
   const {
     allFile: { edges: allImages },
@@ -45,29 +42,21 @@ const Images = () => {
   } = allImages[img]
 
   const onImgLoad = () => {
-    setVisible(1)
-
     setTimeout(() => {
-      setVisible(0)
-
-      setTimeout(() => {
-        setImg(prevI => {
-          return allImages.length - 1 > prevI ? prevI + 1 : 0
-        })
-      }, 2000)
+      setImg(prevI => {
+        return allImages.length - 1 > prevI ? prevI + 1 : 0
+      })
     }, 4000)
   }
 
   return (
     <Wrapper>
       <h1>nie moge mam spanko</h1>
-      <motion.img
+      <img
         alt="spanko"
         src={publicURL}
         onLoad={onImgLoad}
         onError={onImgLoad}
-        animate={{ opacity: visible }}
-        transition={{ duration: 2 }}
       />
       <div />
     </Wrapper>
